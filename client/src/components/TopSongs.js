@@ -9,7 +9,7 @@ function TopSongs() {
 
     // After first render, get top songs within last 6 months and set to songs state array
     useEffect(() => {
-    const url = 'http://localhost:3001/topsongs'
+    const url = '/topsongs'
     const response = axios.get(url)
     response.then(res => {
         // Create new object from response data
