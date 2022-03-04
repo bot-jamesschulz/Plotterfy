@@ -29,7 +29,7 @@ function Recommendations() {
     }, [])
 
     const refresh = () => {
-      const url = 'http://localhost:3001/recommendations'
+      const url = '/recommendations'
         const response = axios.get(url)
         response.then(res => {
             const newSong = res.data.map(x => {

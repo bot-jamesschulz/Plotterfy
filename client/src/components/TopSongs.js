@@ -34,7 +34,7 @@ function TopSongs() {
     
     // request top 20 songs within the last 4 weeks
     const shortTerm = () => {
-      const url = 'http://localhost:3001/topsongs/shortterm'
+      const url = '/topsongs/shortterm'
       const response = axios.get(url)
       response.then(res => {
       // Create new object from response data
@@ -55,7 +55,7 @@ function TopSongs() {
     }
     // request top 20 songs within the last 6 months
     const mediumTerm = () => {
-      const url = 'http://localhost:3001/topsongs'
+      const url = '/topsongs'
       const response = axios.get(url)
       response.then(res => {
         // Create new object from response data
