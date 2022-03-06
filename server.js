@@ -222,13 +222,13 @@ spotifyApi.getMyTopArtists({limit: 49, offset: 0})
    .then(function(data) {
 
      topArtists.push(...data.body.items)
-     console.log("AFTER CONCATENATION: ", topArtists)
+     //console.log("AFTER CONCATENATION: ", topArtists)
      artistInfo = topArtists.map( (artist, index) => {
        let info = {
           id: index + 1,
           name: artist.name,
           followers: artist.followers.total,
-          image: artist.images[0].url ? (artist.images[0].url) : "https://gyazo.com/0fc646b53b93275468b39911309b1536"
+          image: typeof artist.images[0].url !== 'undefined' ? (artist.images[0].url) : "https://gyazo.com/0fc646b53b93275468b39911309b1536"
        }
        return info
      })
