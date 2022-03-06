@@ -216,23 +216,11 @@ let artistInfo
 spotifyApi.getMyTopArtists({limit: 49, offset: 0})
  .then(function(data) {
    topArtists = data.body.items
-   // const artistInfo = topArtists.map( artist => {
-   //   let info = {
-   //      name: artist.name,
-   //      followers: artist.followers.total,
-   //      image: artist.images[0].url
-   //   }
-   //   return info
-   // })
-     
 
-   
 
    spotifyApi.getMyTopArtists({limit: 50, offset: 49})
    .then(function(data) {
 
-     console.log("BEFORE CONCATENATION: ", topArtists)
-     
      topArtists.push(...data.body.items)
      console.log("AFTER CONCATENATION: ", topArtists)
      artistInfo = topArtists.map( (artist, index) => {
@@ -240,13 +228,12 @@ spotifyApi.getMyTopArtists({limit: 49, offset: 0})
           id: index + 1,
           name: artist.name,
           followers: artist.followers.total,
-          image: artist.images[0].url
+          image: artist.images[0].url ? (artist.images[0].url) : "https://gyazo.com/0fc646b53b93275468b39911309b1536"
        }
        return info
      })
        
- 
-     
+
      console.log(artistInfo)
  
      res.send(artistInfo)
