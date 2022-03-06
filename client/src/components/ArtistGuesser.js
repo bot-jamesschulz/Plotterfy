@@ -31,7 +31,6 @@ function ArtistGuesser() {
             randB.current = Math.floor(Math.random() * 98)
 
             let newArtistPair = [{
-                answer: "",
                 id: artistInfoArr.current[randA.current].id,
                 name: artistInfoArr.current[randA.current].name,
                 followers: artistInfoArr.current[randA.current].followers,
@@ -39,7 +38,6 @@ function ArtistGuesser() {
 
             }, 
             {
-                answer: "",
                 id: artistInfoArr.current[randB.current].id,
                 name: artistInfoArr.current[randB.current].name,
                 followers: artistInfoArr.current[randB.current].followers,
@@ -83,6 +81,7 @@ function ArtistGuesser() {
         //console.log(randA.current, " ", randB.current)
         const newAns = {
             ...answer,
+            answer: "",
             showFollowers: false,
             artistPair: newArtistPair.map(artist => artist)
         }
