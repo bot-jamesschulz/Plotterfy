@@ -27,8 +27,8 @@ function ArtistGuesser() {
             // End fill artistInfoArr
 
             // get two random artists from artistInfoArr and put them in artistPair
-            randA.current = Math.floor(Math.random() * 98)
-            randB.current = Math.floor(Math.random() * 98)
+            randA.current = Math.floor(Math.random() * artistInfoArr.current.length)
+            randB.current = Math.floor(Math.random() * artistInfoArr.current.length)
 
             let newArtistPair = [{
                 id: artistInfoArr.current[randA.current].id,
@@ -59,8 +59,8 @@ function ArtistGuesser() {
 
     // Generate new artist pairs
     const newPair = () => {
-        randA.current = Math.floor(Math.random() * 98)
-        randB.current = Math.floor(Math.random() * 98)
+        randA.current = Math.floor(Math.random() * artistInfoArr.current.length)
+        randB.current = Math.floor(Math.random() * artistInfoArr.current.length)
 
         let newArtistPair = [{
            

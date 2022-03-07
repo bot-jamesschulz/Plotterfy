@@ -228,7 +228,7 @@ spotifyApi.getMyTopArtists({limit: 49, offset: 0})
           id: index + 1,
           name: artist.name,
           followers: artist.followers.total,
-          image: typeof artist.images[0].url !== 'undefined' ? (artist.images[0].url) : "https://gyazo.com/0fc646b53b93275468b39911309b1536"
+          image: artist.images.length > 1 ? (artist.images[0].url) : ""
        }
        return info
      })
