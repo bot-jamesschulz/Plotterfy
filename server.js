@@ -153,7 +153,7 @@ app.get('/topsongs/shortterm', (req, res) => {
    // End top tracks request
 });
 
-app.get('/recommendations', (req, res) => {
+app.get('/songs/recommendations', (req, res) => {
  console.log("recommendations: start")
 
  spotifyApi
@@ -207,7 +207,7 @@ app.get('/recommendations', (req, res) => {
 }); 
    
  
-app.get('/artist-guesser', (req, res) => {
+app.get('/artists/artist-guesser', (req, res) => {
 console.log("Artist guesser start")
 
 let topArtists
