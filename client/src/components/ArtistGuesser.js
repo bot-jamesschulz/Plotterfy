@@ -10,7 +10,7 @@ function ArtistGuesser() {
     const randB = useRef(0) // Random number for 2nd artist in pair
     
     useEffect(() => {
-        const url = '/artist-guesser'
+        const url = '/artists/artist-guesser'
         const response = axios.get(url)
         response.then(res => {
             // Fill artistInfoArr
