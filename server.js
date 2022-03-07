@@ -108,7 +108,7 @@ app.get('/topsongs', (req, res) => {
        // array of objects to store track info in
        let trackNames = topTracks.map((x, index)=> {
          var track = new Object()
-         track.image = x.album.images > 0 ? x.album.images[0].url : ""
+         track.image = x.album.images.length > 0 ? x.album.images[0].url : ""
          track.id = index + 1
          track.name = x.name
          track.artists = x.album.artists.map(y => y.name)
@@ -137,7 +137,7 @@ app.get('/topsongs/shortterm', (req, res) => {
        // array of objects to store track info in
        let trackNames = topTracks.map((x, index)=> {
          var track = new Object()
-         track.image = x.album.images > 0 ? x.album.images[0].url : ""
+         track.image = x.album.images.length > 0 ? x.album.images[0].url : ""
          track.id = index + 1
          track.name = x.name
          track.artists = x.album.artists.map(y => y.name)
@@ -182,7 +182,7 @@ app.get('/recommendations', (req, res) => {
 
        let trackInfo = recommendations.map((x, index)=> {
          let track = {
-         image: x.album.images > 0 ? x.album.images[0].url : "",
+         image: x.album.images.length > 0 ? x.album.images[0].url : "",
          id: index + 1,
          name: x.name,
          artists: x.artists.map(y => y.name),
@@ -228,7 +228,7 @@ spotifyApi.getMyTopArtists({limit: 49, offset: 0})
           id: index + 1,
           name: artist.name,
           followers: artist.followers.total,
-          image: artist.images.length > 1 ? (artist.images[0].url) : ""
+          image: artist.images.length > 0 ? (artist.images[0].url) : ""
        }
        return info
      })
