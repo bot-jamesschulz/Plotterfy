@@ -5,8 +5,10 @@ import Login from './Login'
 
 
 function TopSongs({valid}) {
-  if(!valid) return <Login />
+  
   const [songs, setSongs] = useState([])
+
+  if(!valid) return <Login />
   
   // After first render, get top songs within last 6 months and set to songs state array
   useEffect(() => {

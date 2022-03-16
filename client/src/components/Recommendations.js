@@ -5,8 +5,10 @@ import Login from './Login'
 
 
 function Recommendations({valid}) {
-  if(!valid) return <Login />
+  
   const [songs, setSongs] = useState([])
+
+  if(!valid) return <Login />
 
   useEffect(() => {
       const url = '/songs/recommendations'
