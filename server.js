@@ -97,7 +97,6 @@ app.get('/callback', (req, res) => {
 });
 
 app.get('/topsongs', (req, res) => {
- console.log("topsongs: 1")
  //request top tracks
  spotifyApi
      .getMyTopTracks({limit: 50})
@@ -115,7 +114,6 @@ app.get('/topsongs', (req, res) => {
          track.url = x.external_urls.spotify
          return track
        })
-       console.log(trackNames) // check data
 
        res.send(trackNames) // send array
 
@@ -144,7 +142,6 @@ app.get('/topsongs/shortterm', (req, res) => {
          track.url = x.external_urls.spotify
          return track
        })
-       console.log(trackNames) // check data
  
        res.send(trackNames) // send array
      }, function(err) {
@@ -154,7 +151,6 @@ app.get('/topsongs/shortterm', (req, res) => {
 });
 
 app.get('/songs/recommendations', (req, res) => {
- console.log("recommendations: start")
 
  spotifyApi
    .getMyTopTracks({time_range: "short_term", limit: 5})
@@ -165,9 +161,6 @@ app.get('/songs/recommendations', (req, res) => {
      
    
      trackIds = topTracks.map(track => track.id)
-     //console.log("Track ID's: ", trackIds) // check data
-
-
 
    spotifyApi
      .getRecommendations({
@@ -190,12 +183,9 @@ app.get('/songs/recommendations', (req, res) => {
          }
          return track
        })
-       //let names = recommendations.tracks.map(track => track.name)
-       console.log("Recommendation: ", trackInfo);
 
        res.send(trackInfo)
 
-       console.log("recommendations: finish")
      }, function(err) {
        console.log("Something went wrong!", err);
      });
@@ -208,7 +198,6 @@ app.get('/songs/recommendations', (req, res) => {
    
  
 app.get('/artists/artist-guesser', (req, res) => {
-console.log("Artist guesser start")
 
 let topArtists
 let artistInfo
@@ -222,7 +211,6 @@ spotifyApi.getMyTopArtists({limit: 49, offset: 0})
    .then(function(data) {
 
      topArtists.push(...data.body.items)
-     //console.log("AFTER CONCATENATION: ", topArtists)
      artistInfo = topArtists.map( (artist, index) => {
        let info = {
           id: index + 1,
@@ -232,12 +220,8 @@ spotifyApi.getMyTopArtists({limit: 49, offset: 0})
        }
        return info
      })
-       
-
-     console.log(artistInfo)
  
      res.send(artistInfo)
-   console.log("Artist guesser finish")
    }, function(err) {
      console.log('Something went wrong!', err);
  });
@@ -256,5 +240,4 @@ app.get('*', (req,res) =>{
  
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
- console.log(`Server running on port ${PORT}`)
 })

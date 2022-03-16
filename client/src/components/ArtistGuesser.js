@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState, useRef } from 'react'
 import {Card, Button, Container, Row, Col} from 'react-bootstrap'
+import Login from './Login'
+
 
 
 function ArtistGuesser() {
@@ -29,6 +31,9 @@ function ArtistGuesser() {
             // get two random artists from artistInfoArr and put them in artistPair
             randA.current = Math.floor(Math.random() * artistInfoArr.current.length)
             randB.current = Math.floor(Math.random() * artistInfoArr.current.length)
+            while(randB.current === randA.current) {
+                randB.current = Math.floor(Math.random() * artistInfoArr.current.length)
+                }
 
             let newArtistPair = [{
                 id: artistInfoArr.current[randA.current].id,
@@ -43,7 +48,6 @@ function ArtistGuesser() {
                 followers: artistInfoArr.current[randB.current].followers,
                 image: artistInfoArr.current[randB.current].image
             }]
-            //console.log(randA.current, " ", randB.current)
 
             const newAns = {
                 ...answer,
@@ -61,6 +65,9 @@ function ArtistGuesser() {
     const newPair = () => {
         randA.current = Math.floor(Math.random() * artistInfoArr.current.length)
         randB.current = Math.floor(Math.random() * artistInfoArr.current.length)
+        while(randB.current === randA.current) {
+            randB.current = Math.floor(Math.random() * artistInfoArr.current.length)
+            }
 
         let newArtistPair = [{
            
@@ -78,7 +85,7 @@ function ArtistGuesser() {
             image: artistInfoArr.current[randB.current].image
         }]
 
-        //console.log(randA.current, " ", randB.current)
+
         const newAns = {
             ...answer,
             answer: "",
@@ -91,7 +98,6 @@ function ArtistGuesser() {
    
     // 
     const imageClick = (artistA, artistB) => {
-        console.log("asdasd")  
        
         let newAnswer = {
             ...answer,
@@ -99,16 +105,14 @@ function ArtistGuesser() {
             answer: artistA.followers > artistB.followers ? "Correct" : "Incorrect",
            
         }
-        console.log(newAnswer)
         setAnswer(newAnswer)
         
 
     }
 
  
-    
-    //console.log("Artist pair: ", artistPair)
-    console.log("Artist array: ",artistInfoArr)
+    if(!valid) return <Login />
+
     return (
 
         artistInfoArr.current.length !== 0 ? (
@@ -149,7 +153,6 @@ function ArtistGuesser() {
                 
                 </Card.Text>
                 ) : null}
-                {console.log(answer.showFollowers)}
             </Card.Body>
         </Card>
         </div>
