@@ -4,7 +4,7 @@ import {Card, Button, Container} from 'react-bootstrap'
 import Login from './Login'
 
 
-function TopSongs() {
+function TopSongs({valid}) {
     const [songs, setSongs] = useState([])
     
 

@@ -4,7 +4,7 @@ import {Card, Button, Container} from 'react-bootstrap'
 import Login from './Login'
 
 
-function Recommendations() {
+function Recommendations({valid}) {
     const [songs, setSongs] = useState([])
 
     useEffect(() => {
