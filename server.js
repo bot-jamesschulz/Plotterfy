@@ -41,9 +41,7 @@ const scopes = [
 // Sends authorization URL back to front end which then redirects
 //  user to login page.
 app.get('/login', (req, res) => {
- console.log("1")
  res.send(spotifyApi.createAuthorizeURL(scopes))
- console.log("2")
 });
 
 // After login, user is sent to callback route
@@ -121,7 +119,6 @@ app.get('/topsongs', (req, res) => {
        console.log('Something went wrong!', err);
      }); 
    // End top tracks request
- console.log("topsongs: 2")
 });
 
 app.get('/topsongs/shortterm', (req, res) => {
