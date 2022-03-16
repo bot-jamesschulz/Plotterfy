@@ -11,7 +11,7 @@ function ArtistGuesser({valid}) {
     const randA = useRef(0) // Random number for 1st artist in pair
     const randB = useRef(0) // Random number for 2nd artist in pair
 
-    if(!valid) return <Login />
+    
 
     
     useEffect(() => {
@@ -114,7 +114,7 @@ function ArtistGuesser({valid}) {
     }
 
  
-    
+    if(!valid) return <Login />
 
     return (
 

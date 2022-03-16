@@ -8,7 +8,7 @@ function Recommendations({valid}) {
   
   const [songs, setSongs] = useState([])
 
-  if(!valid) return <Login />
+  
 
   useEffect(() => {
       const url = '/songs/recommendations'
@@ -46,7 +46,7 @@ function Recommendations({valid}) {
       })
     }
   
-  
+  if(!valid) return <Login />
 
   return (
     <div>
