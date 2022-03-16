@@ -5,45 +5,46 @@ import Login from './Login'
 
 
 function Recommendations({valid}) {
-    const [songs, setSongs] = useState([])
-
-    useEffect(() => {
-        const url = '/songs/recommendations'
-      const response = axios.get(url)
-        response.then(res => {
-            const newSong = res.data.map(x => {
-                let trackInfo = {
-                image: x.image,
-                id: x.id,
-                name: x.name,
-                artist: x.artists.join(", "),
-                url: x.url
-                }
-                return trackInfo
-            })
-            setSongs(newSong)
-        })      
-    }, [])
-
-    const refresh = () => {
-      const url = 'songs/recommendations'
-        const response = axios.get(url)
-        response.then(res => {
-            const newSong = res.data.map(x => {
-                let trackInfo = {
-                image: x.image,
-                id: x.id,
-                name: x.name,
-                artist: x.artists.join(", "),
-                url: x.url
-                }
-                return trackInfo
-            })
-            setSongs(newSong)
-        })
-      }
-   
   if(!valid) return <Login />
+  const [songs, setSongs] = useState([])
+
+  useEffect(() => {
+      const url = '/songs/recommendations'
+    const response = axios.get(url)
+      response.then(res => {
+          const newSong = res.data.map(x => {
+              let trackInfo = {
+              image: x.image,
+              id: x.id,
+              name: x.name,
+              artist: x.artists.join(", "),
+              url: x.url
+              }
+              return trackInfo
+          })
+          setSongs(newSong)
+      })      
+  }, [])
+
+  const refresh = () => {
+    const url = 'songs/recommendations'
+      const response = axios.get(url)
+      response.then(res => {
+          const newSong = res.data.map(x => {
+              let trackInfo = {
+              image: x.image,
+              id: x.id,
+              name: x.name,
+              artist: x.artists.join(", "),
+              url: x.url
+              }
+              return trackInfo
+          })
+          setSongs(newSong)
+      })
+    }
+  
+  
 
   return (
     <div>
@@ -72,6 +73,6 @@ function Recommendations({valid}) {
 
 
   );
-  }
+}
   export default Recommendations;
     

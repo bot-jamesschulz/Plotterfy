@@ -6,6 +6,8 @@ import Login from './Login'
 
 
 function ArtistGuesser({valid}) {
+    if(!valid) return <Login />
+
     const artistInfoArr = useRef([]) // Top 99 artists, called on initial render
     const [answer, setAnswer] = useState({}) // Answer text to be displayed
     const randA = useRef(0) // Random number for 1st artist in pair
@@ -111,7 +113,7 @@ function ArtistGuesser({valid}) {
     }
 
  
-    if(!valid) return <Login />
+    
 
     return (
 
