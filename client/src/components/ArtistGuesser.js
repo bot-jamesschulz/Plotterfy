@@ -5,7 +5,7 @@ import Login from './Login'
 
 
 
-function ArtistGuesser() {
+function ArtistGuesser({valid}) {
     const artistInfoArr = useRef([]) // Top 99 artists, called on initial render
     const [answer, setAnswer] = useState({}) // Answer text to be displayed
     const randA = useRef(0) // Random number for 1st artist in pair

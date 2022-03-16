@@ -1,22 +1,22 @@
 import {Card, Button, Container} from 'react-bootstrap'
-function Home() {
+import Login from './Login'
+function Home({valid}) {
 
   return (
     <div >
-    <Container  >
-    <Card className="text-center">
-      <Card.Img variant="top" src="https://i.gyazo.com/a07754d20552191049cf5a11b8090373.png" />
-     
-      <Card.Body>
-        <Card.Title>Application for interacting with your Spotify data</Card.Title>
-        <Card.Text>
-          Built using React, Node.js, Bootstrap, Spotify-web-api-node, Express, and Axios
-        </Card.Text>
-      </Card.Body>
-      <Card.Footer><a href="https://github.com/CS458-spotify-project/soft-ware-bois" target="_blank" rel="noopener noreferrer">https://github.com/CS458-spotify-project/soft-ware-bois</a></Card.Footer>
-    </Card>
+    {!valid ? <Login /> : " "}
 
-            
+    <Container  >
+      <Card className="mx-auto text-center bg-light" style={{ width: '50rem' }}>
+        <Card.Img/>
+      
+        <Card.Body>
+          <Card.Title>Interact with your Spotify data using Plotterfy</Card.Title>
+          <Card.Text>
+          {<br/>}{<br/>} Plotterfy allows you to access your most listened to songs year round, generate new recommendations, and engage with your listening data in fun ways.
+          </Card.Text>
+        </Card.Body>
+      </Card>    
     </Container>
     </div>
     
