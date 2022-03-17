@@ -85,7 +85,7 @@ app.get('/callback', (req, res) => {
 
    
      const string = encodeURIComponent('success')
-     res.redirect('https://plotterfy.com/?valid=' + string)
+     res.redirect('https://plotterfy.herokuapp.com/?valid=' + string)
      
    })
    .catch(error => {
