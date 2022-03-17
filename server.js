@@ -85,7 +85,8 @@ app.get('/callback', (req, res) => {
 
    
      const string = encodeURIComponent('success')
-     res.redirect('https://plotterfy.com/?valid=' + string)
+     res.redirect('https://www.plotterfy.com/?valid=' + string)
+     
      
    })
    .catch(error => {
