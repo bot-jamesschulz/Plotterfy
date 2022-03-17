@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Creates new SpotifyWebApi object and sets parameters
 const spotifyApi = new SpotifyWebApi({
- redirectUri: 'plotterfy.com/callback',
+ redirectUri: 'https://plotterfy.com/callback',
  clientId: '4958b6cfcfb84f00b2c12417c0fb767d',
  clientSecret:  '08ed2cc05e9f41508223a2a59eb34b1e'
 });
