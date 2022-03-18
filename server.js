@@ -149,59 +149,49 @@ app.get('/topsongs/shortterm', (req, res) => {
 });
 
 app.get('/songs/recommendations', (req, res) => {
-  spotifyApi.getRecommendations({
-    min_energy: 0.4,
-    seed_artists: ['6mfK6Q2tzLMEchAr0e9Uzu', '4DYFVNKZ1uixa6SQTvzQwJ'],
-    min_popularity: 50
-  })
-.then(function(data) {
-  let recommendations = data.body;
-  console.log(recommendations);
-}, function(err) {
-  console.log("Something went wrong!", err);
-});
-//  spotifyApi
-//    .getMyTopTracks({time_range: "short_term", limit: 5})
-//    .then(function(data) {
 
-//      let trackIds
-//      let topTracks = data.body.items // array of track data objects
+ spotifyApi
+   .getMyTopTracks({time_range: "short_term", limit: 5})
+   .then(function(data) {
+
+     let trackIds
+     let topTracks = data.body.items // array of track data objects
      
    
-//      trackIds = topTracks.map(track => track.id)
+     trackIds = topTracks.map(track => track.id)
 
-//    spotifyApi
-//      .getRecommendations({
-//        min_energy: 0.4,
-//        seed_tracks: trackIds,
-//        min_popularity: 50,
-//        limit: 50
-//      })
-//      .then(function(data) {
+   spotifyApi
+     .getRecommendations({
+       min_energy: 0.4,
+       seed_tracks: trackIds,
+       min_popularity: 50,
+       limit: 50
+     })
+     .then(function(data) {
        
-//        let recommendations = data.body.tracks;
+       let recommendations = data.body.tracks;
 
-//        let trackInfo = recommendations.map((x, index)=> {
-//          let track = {
-//          image: x.album.images.length > 0 ? x.album.images[0].url : "",
-//          id: index + 1,
-//          name: x.name,
-//          artists: x.artists.map(y => y.name),
-//          url: x.external_urls.spotify
-//          }
-//          return track
-//        })
+       let trackInfo = recommendations.map((x, index)=> {
+         let track = {
+         image: x.album.images.length > 0 ? x.album.images[0].url : "",
+         id: index + 1,
+         name: x.name,
+         artists: x.artists.map(y => y.name),
+         url: x.external_urls.spotify
+         }
+         return track
+       })
 
-//        res.send(trackInfo)
+       res.send(trackInfo)
 
-//      }, function(err) {
-//        console.log("Something went wrong!", err);
-//      });
+     }, function(err) {
+       console.log("Something went wrong!", err);
+     });
      
-//  });
+ });
 
-//    }, function(err) {
-//      console.log('Something went wrong!', err);
+   }, function(err) {
+     console.log('Something went wrong!', err);
 }); 
    
  
