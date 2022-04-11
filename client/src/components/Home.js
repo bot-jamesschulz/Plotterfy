@@ -6,7 +6,7 @@ function Home({valid, user}) {
     <>
       <HomeStyle>
         <UpperStyle>
-          <h1><span>Welcome {user},</span> to Plotterfy.</h1>
+          <h1>Welcome to Plotterfy.</h1>
           <p><img src='/logo.svg' alt=''/>Explore your Spotify data.</p>
           <Card/>
         </UpperStyle>

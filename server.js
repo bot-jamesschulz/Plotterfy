@@ -93,17 +93,8 @@ app.get('/callback', (req, res) => {
         spotifyApi.setAccessToken(access_token);
       }, expires_in / 2 * 1000);
 
-      spotifyApi.getMe()
-        .then(function(data) {
-          user = data.body.display_name;
-          console.log('Some information about the authenticated user', user);
-          const string = encodeURIComponent('success')
-          res.redirect(`https://www.plotterfy.com/home/?valid=${string}&user=${user}`)
-      
-        }, function(err) {
-          console.log('Something went wrong!', err);
-        });
-      
+     
+        res.redirect(`https://www.plotterfy.com/home/?valid=${string}`)
     })
     .catch(error => {
       console.error('Error getting Tokens:', error);
