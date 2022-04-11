@@ -94,7 +94,8 @@ app.get('/callback', (req, res) => {
       }, expires_in / 2 * 1000);
 
      
-        res.redirect(`https://www.plotterfy.com/home/?valid=${string}`)
+    const string = encodeURIComponent('success')
+     res.redirect('https://www.plotterfy.com/?valid=' + string
     })
     .catch(error => {
       console.error('Error getting Tokens:', error);
