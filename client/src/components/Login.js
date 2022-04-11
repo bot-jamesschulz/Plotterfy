@@ -1,37 +1,40 @@
 import axios from 'axios'
-import { Card, Button } from 'react-bootstrap'
+import {Button} from './styles/Button.styled'
+import { LoginColor, StyledLogin, Container, Flex } from './styles/Login.styled'
+
 
 function Login() {
 
  
   const routeOne = () => {
-    const url = '/login'
+    const url = 'http://localhost:3001/login'
     axios
       .get(url)
       .then(res => {
+        console.log(res.data)
         window.location.replace(res.data)
       })
   }
   
   return (
-    <div className="text-center ">
-        
-        <Card style={{ width: '40rem' }} className="mx-auto m-2 bg-light">
-          <Card.Img variant="top" src="" />
-          <Card.Body>
-            <Card.Title></Card.Title>
-            <Card.Text>
-              First, you need to log in with your account
-            </Card.Text>
-            <Button 
-            size="lg"
-            className="m-5"
-            variant="dark"
-            onClick={routeOne}>Login
-          </Button>
-          </Card.Body>
-        </Card>
-    </div>
+    <LoginColor>
+      <StyledLogin>
+        <img src='/logo.svg' alt=''></img>
+        <Container>
+          <Flex>
+            <div>
+                <h1>Plotterfy allows you to interact with your Spotify metrics, {<br></br>} year round.</h1>
+                <p>Login with your account to get started</p>
+            </div>
+            <div>
+              <Button 
+                onClick={routeOne}>Login
+              </Button>  
+            </div>
+          </Flex>  
+        </Container> 
+      </StyledLogin>
+    </LoginColor>
   );
     
 }

@@ -1,32 +1,30 @@
-import {Link} from 'react-router-dom'
-import { Navbar, Nav, Container } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { StyledNav, NavContainer, Logo, Pages } from './styles/Navbar.styled'
 
 function NavBar() {
 
-  return (
-    <div>
-    <Container >
-      <Navbar className="justify-content-center fs-5" sticky="top">
-    
-      <Navbar.Brand  as={Link} to="/">
-      <img
-      src="/logo.svg"
-      width="90"
-      height="90"
-      className="d-inline-block align-top"
-      alt=""
-    />
+    return (
+      <NavContainer>
+        <StyledNav>
+          <Link as={Link} to="/">
+                <Logo src='/logo.svg' alt=''/>
+          </Link>
+          <Pages>
+            <li>
+              <Link to='/'>Home</Link>
+            </li>
+            <li>
+              <Link to='/top-songs'>Songs</Link>
+            </li>
+            <li>
+              <Link to='/artist-guesser'>Guess</Link>
+            </li>
+          </Pages>
+        </StyledNav>
       
-      </Navbar.Brand>
-        <Nav >
-        <Nav.Link as={Link} to="/top-songs">Top Songs</Nav.Link> 
-        <Nav.Link as={Link} to="/recommendations">Recommendations</Nav.Link> 
-        <Nav.Link as={Link} to="/artist-guesser">Popularity Guesser</Nav.Link>
-        </Nav>
-    
-      </Navbar>
-    </Container> 
-    </div>
-  );
-}
-export default NavBar;
+      </NavContainer>
+
+    );
+  }
+  export default NavBar;
+  

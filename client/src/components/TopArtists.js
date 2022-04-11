@@ -1,11 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState, useRef } from 'react'
 import Login from './Login'
-import Track from './Track'
+import Artist from './Artist'
 import { SongButton, Selected, SongListContainer, StyledTopSongs, ColumnContainer, SongMenuContainer } from './styles/TopSongs.styled'
 import NavMenu from './NavMenu'
-function TopSongs({valid}) {
-    const [songs, setSongs] = useState([])
+function TopArtists({valid}) {
+    const [artists, setArtists] = useState([])
     const selected = useRef("medium")
     
    
@@ -13,68 +13,70 @@ function TopSongs({valid}) {
 
     // After first render, get top songs within last 6 months and set to songs state array
     useEffect(() => {
-    const url = 'http://localhost:3001/topsongs'
+    const url = 'http://localhost:3001/top-artists'
     const response = axios.get(url)
     response.then(res => {
         // Create new object from response data
-        const newSong = res.data.map(x => {
-          let trackInfo = {
-          image: x.image,
+        const newArtists = res.data.map(x => {
+          let artistInfo = {
           id: x.id,
+          image: x.image,
           name: x.name,
-          artist: x.artists.join(", "),
+          genres: x.genres.slice(0,2).join(', '),
           url: x.url
           }
-          return trackInfo
+          return artistInfo
         })
-        
+        console.log(newArtists)
         // updates song state with new object built from response data
-        setSongs(newSong)
+        setArtists(newArtists)
+    
    
       }) 
     }, [])
 
-    // request top 20 songs within the last 4 weeks
+    //request top 20 songs within the last 4 weeks
     const shortTerm = () => {
-      const url = 'http://localhost:3001/topsongs/shortterm'
+      const url = 'http://localhost:3001/top-artists/short-term'
       const response = axios.get(url)
       response.then(res => {
-      // Create new object from response data
-      const newSong = res.data.map(x => {
-        let trackInfo = {
-        image: x.image,
-        id: x.id,
-        name: x.name,
-        artist: x.artists.join(", "),
-        url: x.url
-        }
-        return trackInfo
-      })
-      selected.current = "short"
-      // updates song state with new object built from response data
-      setSongs(newSong)
+        // Create new object from response data
+        const newArtists = res.data.map(x => {
+          let artistInfo = {
+          id: x.id,
+          image: x.image,
+          name: x.name,
+          genres: x.genres.slice(0,2).join(', '),
+          url: x.url
+          }
+          return artistInfo
+        })
+        console.log(newArtists)
+        selected.current = "short"
+        // updates song state with new object built from response data
+        setArtists(newArtists)
       }) 
     }
 
     // request top 20 songs within the last 6 months
     const mediumTerm = () => {
-      const url = 'http://localhost:3001/topsongs'
+      const url = 'http://localhost:3001/top-artists'
       const response = axios.get(url)
       response.then(res => {
         // Create new object from response data
-      const newSong = res.data.map(x => {
-        let trackInfo = {
-        image: x.image,
-        id: x.id,
-        name: x.name,
-        artist: x.artists.join(", "),
-        url: x.url
-        }
-        return trackInfo
-      })
-      selected.current = "medium"
-      // updates song state with new object built from response data
-      setSongs(newSong)
+        const newArtists = res.data.map(x => {
+          let artistInfo = {
+          id: x.id,
+          image: x.image,
+          name: x.name,
+          genres: x.genres.slice(0,2).join(', '),
+          url: x.url
+          }
+          return artistInfo
+        })
+        console.log(newArtists)
+        // updates song state with new object built from response data
+        setArtists(newArtists)
       }) 
     }
 
@@ -83,9 +85,9 @@ function TopSongs({valid}) {
     return (
       <StyledTopSongs>
         <ColumnContainer>
-          <NavMenu/>
+         <NavMenu/>
           <SongMenuContainer>
-            <h1>Top Songs</h1>
+            <h1>Top Artists</h1>
             <SongButton
             onClick={mediumTerm}>
             {selected.current === "medium" 
@@ -99,10 +101,12 @@ function TopSongs({valid}) {
             : <div>Last month</div>}
             </SongButton>
           </SongMenuContainer>
+
+
           <SongListContainer>
-              {songs.map((track, index) => (
+              {artists.map((artist, index) => (
                 
-                  <Track key={index} track={track}/> 
+                  <Artist key={index} artist={artist}/> 
                         
               ))}
           </SongListContainer>
@@ -111,5 +115,5 @@ function TopSongs({valid}) {
       </StyledTopSongs>
     );
   }
-  export default TopSongs;
+  export default TopArtists;
   

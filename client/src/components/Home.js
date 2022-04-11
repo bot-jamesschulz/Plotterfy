@@ -1,25 +1,17 @@
-import {Card, Button, Container} from 'react-bootstrap'
-import Login from './Login'
-function Home({valid}) {
-
+import {HomeStyle, UpperStyle, LowerStyle, LowerContainer} from './styles/Home.styled'
+import Card from './Card'
+function Home({valid, user}) {
+  
   return (
-    <div >
-    {!valid ? <Login /> : " "}
-
-    <Container  >
-      <Card className="mx-auto text-center bg-light" style={{ width: '50rem' }}>
-        <Card.Img/>
-      
-        <Card.Body>
-          <Card.Title>Interact with your Spotify data using Plotterfy</Card.Title>
-          <Card.Text>
-          {<br/>}{<br/>} Plotterfy allows you to access your most listened to songs year round, generate new recommendations, and engage with your listening data in fun ways.
-          </Card.Text>
-        </Card.Body>
-      </Card>    
-    </Container>
-    </div>
-    
+    <>
+      <HomeStyle>
+        <UpperStyle>
+          <h1><span>Welcome {user},</span> to Plotterfy.</h1>
+          <p><img src='/logo.svg' alt=''/>Explore your Spotify data.</p>
+          <Card/>
+        </UpperStyle>
+      </HomeStyle>
+    </>
   );
 }
 export default Home;

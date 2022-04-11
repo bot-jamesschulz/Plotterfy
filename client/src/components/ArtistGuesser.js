@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState, useRef } from 'react'
-import {Card, Button, Container, Row, Col} from 'react-bootstrap'
 import Login from './Login'
+import NavMenu from './NavMenu'
+import { InfoContainer, StyledArtistGuesser, ArtistLayout, ArtistImage, ArtistInfo, Button, AnswerAlign, ButtonAlign, AnswerContainer } from './styles/ArtistGuesser.styled'
 
 
 
@@ -10,12 +11,9 @@ function ArtistGuesser({valid}) {
     const [answer, setAnswer] = useState({}) // Answer text to be displayed
     const randA = useRef(0) // Random number for 1st artist in pair
     const randB = useRef(0) // Random number for 2nd artist in pair
-
-    
-
     
     useEffect(() => {
-        const url = '/artists/artist-guesser'
+        const url = 'http://localhost:3001/artist-guesser'
         const response = axios.get(url)
         response.then(res => {
             // Fill artistInfoArr
@@ -28,17 +26,20 @@ function ArtistGuesser({valid}) {
                 }
                 return artistInfo
             })
+            
             artistInfoArr.current = newArtistArr
             // End fill artistInfoArr
 
             // get two random artists from artistInfoArr and put them in artistPair
+
             randA.current = Math.floor(Math.random() * artistInfoArr.current.length)
             randB.current = Math.floor(Math.random() * artistInfoArr.current.length)
             while(randB.current === randA.current) {
-                randB.current = Math.floor(Math.random() * artistInfoArr.current.length)
-                }
+            randB.current = Math.floor(Math.random() * artistInfoArr.current.length)
+            }
 
             let newArtistPair = [{
+                
                 id: artistInfoArr.current[randA.current].id,
                 name: artistInfoArr.current[randA.current].name,
                 followers: artistInfoArr.current[randA.current].followers,
@@ -46,11 +47,13 @@ function ArtistGuesser({valid}) {
 
             }, 
             {
+                
                 id: artistInfoArr.current[randB.current].id,
                 name: artistInfoArr.current[randB.current].name,
                 followers: artistInfoArr.current[randB.current].followers,
                 image: artistInfoArr.current[randB.current].image
             }]
+
 
             const newAns = {
                 ...answer,
@@ -74,6 +77,7 @@ function ArtistGuesser({valid}) {
 
         let newArtistPair = [{
            
+            
             id: artistInfoArr.current[randA.current].id,
             name: artistInfoArr.current[randA.current].name,
             followers: artistInfoArr.current[randA.current].followers,
@@ -81,13 +85,11 @@ function ArtistGuesser({valid}) {
 
         }, 
         {
-           
             id: artistInfoArr.current[randB.current].id,
             name: artistInfoArr.current[randB.current].name,
             followers: artistInfoArr.current[randB.current].followers,
             image: artistInfoArr.current[randB.current].image
         }]
-
 
         const newAns = {
             ...answer,
@@ -95,12 +97,13 @@ function ArtistGuesser({valid}) {
             showFollowers: false,
             artistPair: newArtistPair.map(artist => artist)
         }
-        
+
         setAnswer(newAns)
     }
    
     // 
     const imageClick = (artistA, artistB) => {
+
        
         let newAnswer = {
             ...answer,
@@ -108,6 +111,7 @@ function ArtistGuesser({valid}) {
             answer: artistA.followers > artistB.followers ? "Correct" : "Incorrect",
            
         }
+
         setAnswer(newAnswer)
         
 
@@ -119,58 +123,49 @@ function ArtistGuesser({valid}) {
     return (
 
         artistInfoArr.current.length !== 0 ? (
-      <div className="text-center" >
-        <h1>Guess which artist has more followers</h1>
-        <Container>
-        <Row>
-        <Col>
-
-        <div onClick={(e) => imageClick(answer.artistPair[0], answer.artistPair[1])}>
+      <>
+        <NavMenu/>
+        <StyledArtistGuesser>
         
-        <Card className="mx-auto p-1 m-1" style={{ width: '30rem' }}>
-            <Card.Img variant="top" src={answer.artistPair[0].image} height="470" />
-            <Card.Body>
-                <Card.Title className="h1">{answer.artistPair[0].name}</Card.Title>
-                {answer.showFollowers ? (
-                <Card.Text>
-                    {answer.artistPair[answer.artistPair.findIndex(x => x.name === answer.artistPair[0].name)].followers}
-                    {} Followers
-                </Card.Text>
-                ) : null}
-            </Card.Body>
-        </Card>
-        </div>
-        </Col>
-        <Col>
-        <div onClick={(e) => imageClick(answer.artistPair[1], answer.artistPair[0])}>
-        <Card className="mx-auto p-1 m-1" style={{ width: '30rem' }}>
-            <Card.Img variant="top" src={answer.artistPair[1].image} height="470"/>
-            <Card.Body>
-                <Card.Title className="h1">{answer.artistPair[1].name}</Card.Title>
-                {answer.showFollowers ? (
-                <Card.Text>
-                
-                    {answer.artistPair[answer.artistPair.findIndex(x => x.name === answer.artistPair[1].name)].followers}
-                    {} Followers
-                
-                
-                </Card.Text>
-                ) : null}
-            </Card.Body>
-        </Card>
-        </div>
-        </Col>
-        </Row>
-    
-        <h3>{answer.answer}</h3> 
-        <Button 
-            variant="outline-dark"
-            onClick={newPair}> Next
-        </Button>
-        
-      
-        </Container>
-      </div>
+            <ArtistLayout>
+            
+                    <ArtistInfo>
+                        <ArtistImage src={answer.artistPair[0].image} onClick={(e) => imageClick(answer.artistPair[0], answer.artistPair[1])}/>
+                        <InfoContainer>
+                                <h2>{answer.artistPair[0].name}</h2>
+                                {answer.showFollowers ? (
+                                <div>
+                                    {answer.artistPair[answer.artistPair.findIndex(x => x.name === answer.artistPair[0].name)].followers.toLocaleString("en-US")}
+                                    {} followers
+                                </div>
+                                ) : null}
+                        </InfoContainer>
+                    </ArtistInfo>
+                    <AnswerAlign>
+                        <AnswerContainer>
+                            <h1>{answer.answer}</h1>
+                        </AnswerContainer>
+                    </AnswerAlign>
+                    <ArtistInfo>
+                        <ArtistImage src={answer.artistPair[1].image} onClick={(e) => imageClick(answer.artistPair[1], answer.artistPair[0])}/> 
+                            <InfoContainer>
+                                <h2>{answer.artistPair[1].name}</h2>
+                                
+                                {answer.showFollowers ? (
+                                <div>
+                                    {answer.artistPair[answer.artistPair.findIndex(x => x.name === answer.artistPair[1].name)].followers.toLocaleString("en-US")}
+                                    {} followers
+                                </div>
+                            ) : null}
+                            </InfoContainer>
+                    </ArtistInfo>
+   
+            </ArtistLayout>
+            <ButtonAlign><Button 
+                        onClick={newPair}> <h1>Go Again</h1>
+                    </Button></ButtonAlign>
+        </StyledArtistGuesser>                
+      </>
         )
       : ""
     );
