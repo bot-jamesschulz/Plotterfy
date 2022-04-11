@@ -1,7 +1,8 @@
 import {HomeStyle, UpperStyle, LowerStyle, LowerContainer} from './styles/Home.styled'
 import Card from './Card'
-function Home({valid, user}) {
+function Home({valid}) {
   
+  if(!valid) return <Login />
   return (
     <>
       <HomeStyle>
