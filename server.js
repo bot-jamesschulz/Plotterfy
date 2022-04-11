@@ -98,7 +98,7 @@ app.get('/callback', (req, res) => {
           user = data.body.display_name;
           console.log('Some information about the authenticated user', user);
           const string = encodeURIComponent('success')
-          res.redirect(`https://www.plotterfy.com//home/?valid=${string}&user=${user}`)
+          res.redirect(`https://www.plotterfy.com/home/?valid=${string}&user=${user}`)
       
         }, function(err) {
           console.log('Something went wrong!', err);
