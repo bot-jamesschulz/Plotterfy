@@ -162,7 +162,7 @@ function ArtistGuesser({valid}) {
    
             </ArtistLayout>
             <ButtonAlign><Button 
-                        onClick={newPair}> <h1>Go Again</h1>
+                        onClick={newPair}> <h1>Go again</h1>
                     </Button></ButtonAlign>
         </StyledArtistGuesser>                
       </>
