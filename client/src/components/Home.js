@@ -1,5 +1,6 @@
 import {HomeStyle, UpperStyle, LowerStyle, LowerContainer} from './styles/Home.styled'
 import Card from './Card'
+import Login from './Login'
 function Home({valid}) {
   
   if(!valid) return <Login />
