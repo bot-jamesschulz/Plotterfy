@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
  
+// Global background
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #112426;
