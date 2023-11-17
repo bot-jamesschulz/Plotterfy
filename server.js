@@ -93,7 +93,7 @@ app.get('/callback', (req, res) => {
  
     
       const string = encodeURIComponent('success')
-      res.redirect('https://www.plotterfy.com/home/?valid=' + string)
+      res.redirect( https://plotterfy.onrender.com/home/?valid=' + string)
       
       
     })
