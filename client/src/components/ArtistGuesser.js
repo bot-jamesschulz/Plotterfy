@@ -26,7 +26,6 @@ function ArtistGuesser({valid}) {
                 }
                 return artistInfo
             })
-            
             artistInfoArr.current = newArtistArr
             // End fill artistInfoArr
 
