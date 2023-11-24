@@ -11,6 +11,11 @@ app.use(cors())
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+
 // Creates new SpotifyWebApi object and sets parameters
 const spotifyApi = new SpotifyWebApi({
  redirectUri: 'https://plotterfy.com/callback',
@@ -39,12 +44,6 @@ const scopes = [
   'user-follow-read',
   'user-follow-modify'
 ];
-
-// Sends authorization URL back to front end which then redirects
-//  user to login page.
-app.get('/login', (req, res) => {
- res.send(spotifyApi.createAuthorizeURL(scopes))
-});
 
 // Sends authorization URL back to front end which then redirects
 //  user to login page.
@@ -96,8 +95,6 @@ app.get('/callback', (req, res) => {
     
       const string = encodeURIComponent('success')
       res.redirect('https://plotterfy.com/home/?valid=' + string)
-      
-      
     })
     .catch(error => {
       console.error('Error getting Tokens:', error);
@@ -162,19 +159,8 @@ app.get('/topsongs/shortterm', (req, res) => {
     // End top tracks request
 });
  
+// WIP route
 app.get('/recommendations', (req, res) => {
-
-// console.log('access token - - -', spotifyApi.getAccessToken())
-// const response = axios.get('https://api.spotify.com/v1/recommendations', {
-//   headers: {
-//     'Authorization': `Bearer ${spotifyApi.getAccessToken()}`,
-//     'Content-Type': 'application/json'
-//   }
-// })
-//     response.then(res => {
-//         console.log('success', res.body)
-//         })
-
   console.log("recommendations route start")
 
   spotifyApi
@@ -212,7 +198,6 @@ app.get('/recommendations', (req, res) => {
           }
           return track
         })
-        //let names = recommendations.tracks.map(track => track.name)
         console.log("Recommendation: ", trackInfo);
 
         res.send(trackInfo)
@@ -237,25 +222,11 @@ let artistInfo
 spotifyApi.getMyTopArtists({limit: 49, offset: 0})
   .then(function(data) {
     topArtists = data.body.items
-    // const artistInfo = topArtists.map( artist => {
-    //   let info = {
-    //      name: artist.name,
-    //      followers: artist.followers.total,
-    //      image: artist.images[0].url
-    //   }
-    //   return info
-    // })
-    
-    
-
+  
     spotifyApi.getMyTopArtists({limit: 50, offset: 49})
     .then(function(data) {
 
-      
-      
       topArtists.push(...data.body.items)
-      
-      //console.log("AFTER CONCATENATION: ", topArtists)
       
       artistInfo = topArtists.map( (artist, index) => {
         let info = {
@@ -267,23 +238,16 @@ spotifyApi.getMyTopArtists({limit: 49, offset: 0})
           }
         return info
       })
-        
-  
-      
-      //console.log(artistInfo)
-  
+
       res.send(artistInfo)
     console.log("Artist guesser finish")
     }, function(err) {
       console.log('Something went wrong!', err);
   });
 
-    
   }, function(err) {
     console.log('Something went wrong!', err);
-});
-
-
+  });
 });
   
 app.get('/top-artists', (req, res) => {
@@ -298,7 +262,6 @@ app.get('/top-artists', (req, res) => {
          name: artist.name,
          genres: artist.genres,
          image: artist.images.length > 1 ? (artist.images[0].url) : ""
-         //image: ""
         }
       return info
     })
@@ -322,7 +285,6 @@ app.get('/top-artists/short-term', (req, res) => {
          name: artist.name,
          genres: artist.genres,
          image: artist.images.length > 1 ? (artist.images[0].url) : ""
-         //image: ""
         }
       return info
     })
@@ -335,11 +297,6 @@ app.get('/top-artists/short-term', (req, res) => {
   console.log("topArtists: 2")
 });
 
-// Handles any requests that don't match the ones above
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
-
-const PORT = process.env.PORT || 3001
+const PORT =  3001
 app.listen(PORT, () => {
 })
