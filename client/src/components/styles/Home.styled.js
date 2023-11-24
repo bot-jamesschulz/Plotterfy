@@ -1,25 +1,21 @@
 import styled from 'styled-components'
 
+
 export const HomeStyle = styled.div`
-background-color: #112426;
-background-image: url('/top1.svg');
-background-position: bottom left;
-background-repeat: no-repeat;
-background-attachment: fixed;
-background-size: 75%;
-`
-export const UpperStyle = styled.div`
+    background-image: url('/top1.svg');
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 75%;
     min-height: calc(60vh - 40px);
-    max-width: 80%;
+    max-width: 90%;
     margin: 0 auto;
     color: #cccf9f;
-    //border: 5px solid black;
     & > *{
         font-family: Helvetica neue, sans-serif;
         font-weight: bold;
         letter-spacing: 0.2rem;
-        
-        
+              
     }
     h1 {
         
@@ -48,9 +44,4 @@ export const LowerContainer = styled.div`
     padding: 50px 0;
     height: fit-content;
     margin: 0 auto;
-
-    //border: 5px solid black;
-    
-
-    
 `

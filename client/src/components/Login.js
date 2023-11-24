@@ -7,7 +7,7 @@ function Login() {
 
  
   const routeOne = () => {
-    const url = '/login'
+    const url = 'http://localhost:3001/login'
     axios
       .get(url)
       .then(res => {

@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Creates new SpotifyWebApi object and sets parameters
 const spotifyApi = new SpotifyWebApi({
- redirectUri: 'http://localhost:3000/callback',
+ redirectUri: 'https://plotterfy.com/callback',
  clientId: process.env.SPOTIFY_CLIENT_ID,
  clientSecret:  process.env.SPOTIFY_CLIENT_SECRET
 });
@@ -88,7 +88,7 @@ app.get('/callback', (req, res) => {
  
     
       const string = encodeURIComponent('success')
-      res.redirect('http://localhost:3000/home/?valid=' + string)
+      res.redirect('https://plotterfy.com/home/?valid=' + string)
       
       
     })
@@ -295,7 +295,7 @@ app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
-// const PORT = process.env.PORT || 3000
-const PORT = 3000
+// const PORT = process.env.PORT || 3001
+const PORT = 3001
 app.listen(PORT, () => {
 })

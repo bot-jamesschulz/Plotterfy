@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const LoginColor = styled.div`
-background-color: #112426;
+background-color: #0E1D1E;
 `
 export const StyledLogin = styled.div`
     text-align: center;
@@ -17,11 +17,14 @@ export const StyledLogin = styled.div`
     
     
     h1{
-        font-size: 4.5rem;
+        font-size: 1.5rem;
         letter-spacing: 0.3rem;
         font-weight: bold;
-        padding: 0 0 60px 0;
-        
+    }
+    @media (min-width: 640px) {
+        h1{
+            font-size: 2.5rem;
+        }
     }
 
     p{
@@ -46,13 +49,16 @@ export const Container = styled.header`
 
 export const Flex = styled.div`
     margin: 0 auto;
-    gap: 2rem;
     height: 100%;
-    width: 60%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
+    @media (min-width: 1024px) {
+        width: 60%;
+    }
 
     h1{
         margin: 0 0 50px 0;
