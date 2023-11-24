@@ -11,11 +11,6 @@ app.use(cors())
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// Handles any requests that don't match the ones above
-app.get('*', (req,res) =>{
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
-
 // Creates new SpotifyWebApi object and sets parameters
 const spotifyApi = new SpotifyWebApi({
  redirectUri: 'https://plotterfy.com/callback',
@@ -269,6 +264,11 @@ app.get('/top-artists/short-term', (req, res) => {
   }, function(err) {
     console.log('Something went wrong!', err);
   });
+});
+
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 const PORT = process.env.PORT || 3001
