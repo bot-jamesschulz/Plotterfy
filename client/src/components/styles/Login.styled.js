@@ -11,15 +11,19 @@ export const StyledLogin = styled.div`
     min-height: 100vh;
     min-width: 100vw;
     background-image: url('/headphone2.svg');
-    background-position: top right;
+    background-position: center right;
     background-repeat: no-repeat;
     background-size: 65%;
+
+    display: flex;
+    flex-direction: column;
     
     
     h1{
         font-size: 1.5rem;
         letter-spacing: 0.3rem;
         font-weight: bold;
+        padding-top: 7rem;
     }
     @media (min-width: 640px) {
         h1{
@@ -35,16 +39,17 @@ export const StyledLogin = styled.div`
     img{
         width: 150px; 
         position: absolute;
-        top: 0;
-        left: 0;
+        top: -10px;
+        left: -10px;
     }
     
 `
 
 export const Container = styled.header`
-    margin: 0 auto;
+    margin:  auto;
     width: 80vw;
     height: 100vh; 
+
 `
 
 export const Flex = styled.div`

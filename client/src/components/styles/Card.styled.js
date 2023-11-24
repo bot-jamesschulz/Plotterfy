@@ -24,7 +24,7 @@ export const CardLayout = styled.div`
         font-weight: bold;
         font-size: 2em;
         font-family: Helvetica neue, sans-serif;
-        padding: 40px 20px;
+        padding: 40px 20px 0 20px;
         text-align: center;
         
        
@@ -51,7 +51,7 @@ export const FlexCard = styled.div`
     box-shadow: 1px 1px 10px 0px black;
     background-color: ${({bg}) => bg};
     text-align: center;
-    width: 25rem;
+    width: 20rem;
     height: 20rem;
     border-radius: 100px;
     display: flex;

@@ -105,10 +105,16 @@ export const StyledTrack = styled.div`
         border-radius: 50%;
     }
     div{
-        width: 20rem;
+        width: 12rem;
         padding: 0 5px 0 5px;
         margin: auto auto;
         text-align: center;
+        @media (min-width: 640px) {
+            width: 20rem;
+        } 
+        @media (min-width: 1024) {
+            width: 30rem;
+        } 
     }
     h5{
         color: #cccf9f;

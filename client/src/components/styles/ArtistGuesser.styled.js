@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const StyledArtistGuesser = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     background-color: #0E1D1E;
 
     *{
@@ -49,7 +49,7 @@ export const ArtistInfo = styled.div`
 `
 export const Button = styled.button`
     
-    width: 400px;
+    width: 300px;
     height: 100px;
     border: none;
     border-radius: 50px;
@@ -79,7 +79,7 @@ export const AnswerAlign = styled.div`
     }
 `
 export const ButtonAlign = styled.div`
-
+    margin-bottom: 1rem;
     align-self: center;
     @media (min-width: 640px) {
         margin: 2rem 6rem 2rem 12rem;

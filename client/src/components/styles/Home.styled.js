@@ -27,7 +27,6 @@ export const HomeStyle = styled.div`
 
     p {
         font-size: 3em;
-        padding: 0 50px;
         align-self: flex-end;
         flex: 1;
     }

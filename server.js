@@ -4,6 +4,8 @@ const SpotifyWebApi = require('spotify-web-api-node')
 const axios = require('axios')
 const app = express()
 const path = require('path')
+const dotenv = require('dotenv');
+dotenv.config();
 app.use(cors())
 
 // Serve the static files from the React app
@@ -338,7 +340,6 @@ app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
-// const PORT = process.env.PORT || 3001
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
 })

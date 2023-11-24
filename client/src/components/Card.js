@@ -25,7 +25,7 @@ export default function Card() {
             <FlexCard bg='#af648a' layout='40%'>
                 <div>
                     <h1>Popularity Quiz</h1>
-                    <p>Guess who is more popular between two of your top 100 artists.</p>
+                    <p>Do you know how popular your favorite artists are?.</p>
                 </div>
             </FlexCard>
         </Link>
