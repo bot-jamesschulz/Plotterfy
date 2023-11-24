@@ -48,9 +48,7 @@ const scopes = [
 // Sends authorization URL back to front end which then redirects
 //  user to login page.
 app.get('/login', (req, res) => {
-  console.log("1")
   res.send(spotifyApi.createAuthorizeURL(scopes))
-  console.log("2")
 });
 
 // After login, user is sent to callback route
@@ -103,7 +101,6 @@ app.get('/callback', (req, res) => {
  });
 
 app.get('/topsongs', (req, res) => {
-  console.log("topsongs: 1")
   //request top tracks
   spotifyApi
       .getMyTopTracks({limit: 50})
@@ -121,15 +118,12 @@ app.get('/topsongs', (req, res) => {
           track.url = x.external_urls.spotify
           return track
         })
-        console.log(trackNames) // check data
 
         res.send(trackNames) // send array
 
       }, function(err) {
         console.log('Something went wrong!', err);
       }); 
-    // End top tracks request
-  console.log("topsongs: 2")
 });
 
 app.get('/topsongs/shortterm', (req, res) => {
@@ -150,13 +144,11 @@ app.get('/topsongs/shortterm', (req, res) => {
           track.url = x.external_urls.spotify
           return track
         })
-        console.log(trackNames) // check data
   
         res.send(trackNames) // send array
       }, function(err) {
         console.log('Something went wrong!', err);
       }); 
-    // End top tracks request
 });
  
 // WIP route
@@ -172,40 +164,33 @@ app.get('/recommendations', (req, res) => {
       
     
       trackIds = topTracks.map(track => track.id)
-      //console.log("Track ID's: ", trackIds) // check data
 
-
-    console.log("Before getRecommendations")
-    spotifyApi
-      .getRecommendations({
-        min_energy: 0.4,
-        seed_artists: ['6mfK6Q2tzLMEchAr0e9Uzu', '4DYFVNKZ1uixa6SQTvzQwJ'],
-        min_popularity: 50
-        //limit: 50
-      })
-      .then(function(data) {
-        console.log("In getRecommendations")
-        
-        let recommendations = data.body.tracks;
-
-        let trackInfo = recommendations.map((x, index)=> {
-          let track = {
-          image: x.album.images[0].url,
-          id: index + 1,
-          name: x.name,
-          artists: x.artists.map(y => y.name),
-          url: x.external_urls.spotify
-          }
-          return track
+      spotifyApi
+        .getRecommendations({
+          min_energy: 0.4,
+          seed_artists: ['6mfK6Q2tzLMEchAr0e9Uzu', '4DYFVNKZ1uixa6SQTvzQwJ'],
+          min_popularity: 50
+          //limit: 50
         })
-        console.log("Recommendation: ", trackInfo);
+        .then(function(data) {
+          let recommendations = data.body.tracks;
 
-        res.send(trackInfo)
+          let trackInfo = recommendations.map((x, index)=> {
+            let track = {
+            image: x.album.images[0].url,
+            id: index + 1,
+            name: x.name,
+            artists: x.artists.map(y => y.name),
+            url: x.external_urls.spotify
+            }
+            return track
+          })
 
-        console.log("recommendations: finish")
-      }, function(err) {
-        console.log("Something went wrong!", err);
-      });
+      res.send(trackInfo)
+
+    }, function(err) {
+      console.log("Something went wrong!", err);
+    });
       
   });
 
@@ -214,7 +199,6 @@ app.get('/recommendations', (req, res) => {
 }); 
     
 app.get('/artist-guesser', (req, res) => {
-console.log("Artist guesser start")
 
 let topArtists
 let artistInfo
@@ -240,7 +224,6 @@ spotifyApi.getMyTopArtists({limit: 49, offset: 0})
       })
 
       res.send(artistInfo)
-    console.log("Artist guesser finish")
     }, function(err) {
       console.log('Something went wrong!', err);
   });
@@ -251,8 +234,6 @@ spotifyApi.getMyTopArtists({limit: 49, offset: 0})
 });
   
 app.get('/top-artists', (req, res) => {
-  console.log("topArtists: 1")
-  //request top tracks
   spotifyApi.getMyTopArtists({limit: 50})
   .then(function(data) {
     artistInfo = data.body.items.map( (artist, index) => {
@@ -265,17 +246,13 @@ app.get('/top-artists', (req, res) => {
         }
       return info
     })
-    console.log(artistInfo)
     res.send(artistInfo)
   }, function(err) {
     console.log('Something went wrong!', err);
   });
-    // End top tracks request
-  console.log("topArtists: 2")
 });
 
 app.get('/top-artists/short-term', (req, res) => {
-  console.log("topArtists: 1")
   //request top tracks
   spotifyApi.getMyTopArtists({limit: 50, time_range: "short_term"})
   .then(function(data) {
@@ -288,15 +265,12 @@ app.get('/top-artists/short-term', (req, res) => {
         }
       return info
     })
-    console.log(artistInfo)
     res.send(artistInfo)
   }, function(err) {
     console.log('Something went wrong!', err);
   });
-    // End top tracks request
-  console.log("topArtists: 2")
 });
 
-const PORT =  3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
 })
