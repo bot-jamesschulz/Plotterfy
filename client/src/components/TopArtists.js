@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState, useRef } from 'react'
 import Login from './Login'
 import Artist from './Artist'
-import { SongButton, Selected, SongListContainer, StyledTopSongs, ColumnContainer, SongMenuContainer } from './styles/TopSongs.styled'
+import { SongButton, Selected, SongListContainer, StyledTopSongs, SongMenuContainer } from './styles/TopSongs.styled'
 import NavMenu from './NavMenu'
 function TopArtists({valid}) {
     const [artists, setArtists] = useState([])
@@ -84,7 +84,6 @@ function TopArtists({valid}) {
 
     return (
       <StyledTopSongs>
-        <ColumnContainer>
          <NavMenu/>
           <SongMenuContainer>
             <h1>Top Artists</h1>
@@ -110,8 +109,6 @@ function TopArtists({valid}) {
                         
               ))}
           </SongListContainer>
-        
-        </ColumnContainer>
       </StyledTopSongs>
     );
   }

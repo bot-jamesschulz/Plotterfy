@@ -2,15 +2,12 @@ import axios from 'axios'
 import React, { useEffect, useState, useRef } from 'react'
 import Login from './Login'
 import Track from './Track'
-import { SongButton, Selected, SongListContainer, StyledTopSongs, ColumnContainer, SongMenuContainer } from './styles/TopSongs.styled'
+import { SongButton, Selected, SongListContainer, StyledTopSongs, SongMenuContainer } from './styles/TopSongs.styled'
 import NavMenu from './NavMenu'
 function TopSongs({valid}) {
     const [songs, setSongs] = useState([])
     const selected = useRef("medium")
     
-   
-     
-
     // After first render, get top songs within last 6 months and set to songs state array
     useEffect(() => {
     const url = '/topsongs'
@@ -81,34 +78,29 @@ function TopSongs({valid}) {
     if(!valid) return <Login />
 
     return (
-      <StyledTopSongs>
-        <ColumnContainer>
-          <NavMenu/>
-          <SongMenuContainer>
-            <h1>Top Songs</h1>
-            <SongButton
-            onClick={mediumTerm}>
-            {selected.current === "medium" 
-            ? <Selected>Last 6 months</Selected> 
-            : <div>Last 6 months</div>}
-            </SongButton>
-            <SongButton
-            onClick={shortTerm}>
-            {selected.current === "short" 
-            ? <Selected>Last month</Selected> 
-            : <div>Last month</div>}
-            </SongButton>
-          </SongMenuContainer>
-          <SongListContainer>
-              {songs.map((track, index) => (
-                
-                  <Track key={index} track={track}/> 
-                        
-              ))}
-          </SongListContainer>
-        
-        </ColumnContainer>
-      </StyledTopSongs>
+      <>
+        <NavMenu/>
+        <StyledTopSongs>
+            <SongMenuContainer>
+              <div><h1>Top Songs</h1></div>
+              <SongButton onClick={mediumTerm}>
+                {selected.current === "medium" 
+                ? <Selected>Last 6 months</Selected> 
+                : <div>Last 6 months</div>}
+              </SongButton>
+              <SongButton onClick={shortTerm}>
+                {selected.current === "short" 
+                ? <Selected>Last month</Selected> 
+                : <div>Last month</div>}
+              </SongButton>
+            </SongMenuContainer>
+            <SongListContainer>
+                {songs.map((track, index) => (
+                    <Track key={index} track={track}/> 
+                ))}
+            </SongListContainer>
+        </StyledTopSongs>
+      </>
     );
   }
   export default TopSongs;

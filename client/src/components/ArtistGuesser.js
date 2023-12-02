@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState, useRef } from 'react'
 import Login from './Login'
 import NavMenu from './NavMenu'
-import { InfoContainer, StyledArtistGuesser, ArtistLayout, ArtistImage, ArtistInfo, Button, AnswerAlign, ButtonAlign, AnswerContainer } from './styles/ArtistGuesser.styled'
+import { InfoContainer, StyledArtistGuesser, ArtistLayout, ArtistImage, ArtistInfo, Button, AnswerAlign, ButtonAlign, AnswerContainer, TopInfo } from './styles/ArtistGuesser.styled'
 
 
 
@@ -97,14 +97,10 @@ function ArtistGuesser({valid}) {
             showFollowers: false,
             artistPair: newArtistPair.map(artist => artist)
         }
-
         setAnswer(newAns)
     }
    
-    // 
     const imageClick = (artistA, artistB) => {
-
-       
         let newAnswer = {
             ...answer,
             showFollowers: true,
@@ -113,11 +109,8 @@ function ArtistGuesser({valid}) {
         }
 
         setAnswer(newAnswer)
-        
-
     }
 
- 
     if(!valid) return <Login />
 
     return (
@@ -126,44 +119,46 @@ function ArtistGuesser({valid}) {
       <>
         <NavMenu/>
         <StyledArtistGuesser>
-        
-            <ArtistLayout>
-            
-                    <ArtistInfo>
-                        <ArtistImage src={answer.artistPair[0].image} onClick={(e) => imageClick(answer.artistPair[0], answer.artistPair[1])}/>
-                        <InfoContainer>
-                                <h2>{answer.artistPair[0].name}</h2>
-                                {answer.showFollowers ? (
-                                <div>
-                                    {answer.artistPair[answer.artistPair.findIndex(x => x.name === answer.artistPair[0].name)].followers.toLocaleString("en-US")}
-                                    {} followers
-                                </div>
-                                ) : null}
-                        </InfoContainer>
-                    </ArtistInfo>
-                    <AnswerAlign>
-                        <AnswerContainer>
-                            <h1>{answer.answer}</h1>
-                        </AnswerContainer>
-                    </AnswerAlign>
-                    <ArtistInfo>
-                        <ArtistImage src={answer.artistPair[1].image} onClick={(e) => imageClick(answer.artistPair[1], answer.artistPair[0])}/> 
-                            <InfoContainer>
-                                <h2>{answer.artistPair[1].name}</h2>
-                                
-                                {answer.showFollowers ? (
-                                <div>
-                                    {answer.artistPair[answer.artistPair.findIndex(x => x.name === answer.artistPair[1].name)].followers.toLocaleString("en-US")}
-                                    {} followers
-                                </div>
+            <TopInfo>
+            <h1>Unfortunately, Spotify's API route for follower count is currently down.</h1>
+            Of the two artists from your most-listened-to, which one has more followers?
+            </TopInfo>
+            <ArtistLayout>    
+                <ArtistInfo>
+                    <ArtistImage src={answer.artistPair[0].image} onClick={(e) => imageClick(answer.artistPair[0], answer.artistPair[1])}/>
+                    <InfoContainer>
+                            <h2>{answer.artistPair[0].name}</h2>
+                            {answer.showFollowers ? (
+                            <div>
+                                {answer.artistPair[answer.artistPair.findIndex(x => x.name === answer.artistPair[0].name)].followers.toLocaleString("en-US")}
+                                {} followers
+                            </div>
                             ) : null}
-                            </InfoContainer>
-                    </ArtistInfo>
-   
+                    </InfoContainer>
+                </ArtistInfo>
+                <AnswerAlign>
+                    <AnswerContainer>
+                        <h1>{answer.answer}</h1>
+                    </AnswerContainer>
+                </AnswerAlign>
+                <ArtistInfo>
+                    <ArtistImage src={answer.artistPair[1].image} onClick={(e) => imageClick(answer.artistPair[1], answer.artistPair[0])}/> 
+                        <InfoContainer>
+                            <h2>{answer.artistPair[1].name}</h2>
+                            
+                            {answer.showFollowers ? (
+                            <div>
+                                {answer.artistPair[answer.artistPair.findIndex(x => x.name === answer.artistPair[1].name)].followers.toLocaleString("en-US")}
+                                {} followers
+                            </div>
+                        ) : null}
+                        </InfoContainer>
+                </ArtistInfo>
             </ArtistLayout>
-            <ButtonAlign><Button 
-                        onClick={newPair}> <h1>Go again</h1>
-                    </Button></ButtonAlign>
+            <ButtonAlign>
+                <Button onClick={newPair}> <h1>Go again</h1></Button>
+            </ButtonAlign>
+            
         </StyledArtistGuesser>                
       </>
         )
