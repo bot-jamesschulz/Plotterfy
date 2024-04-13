@@ -118,7 +118,7 @@ function ArtistGuesser({valid}) {
         <NavMenu/>
         <StyledArtistGuesser>
             <TopInfo>
-            Of the two artists from your most-listened-to, which one has more followers?
+            <p class='margin-left: auto; margin-right: auto;'>Of the two artists from your most-listened-to, which one has more followers</p>?
             </TopInfo>
             <ArtistLayout>    
                 <ArtistInfo>
