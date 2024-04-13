@@ -4,8 +4,6 @@ import Login from './Login'
 import NavMenu from './NavMenu'
 import { InfoContainer, StyledArtistGuesser, ArtistLayout, ArtistImage, ArtistInfo, Button, AnswerAlign, ButtonAlign, AnswerContainer, TopInfo } from './styles/ArtistGuesser.styled'
 
-
-
 function ArtistGuesser({valid}) {
     const artistInfoArr = useRef([]) // Top 99 artists, called on initial render
     const [answer, setAnswer] = useState({}) // Answer text to be displayed
@@ -120,7 +118,6 @@ function ArtistGuesser({valid}) {
         <NavMenu/>
         <StyledArtistGuesser>
             <TopInfo>
-            <h1>Unfortunately, Spotify's API route for follower count is currently down.</h1>
             Of the two artists from your most-listened-to, which one has more followers?
             </TopInfo>
             <ArtistLayout>    
